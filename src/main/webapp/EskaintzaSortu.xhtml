@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="jakarta.faces.html"
+ xmlns:f="jakarta.faces.core"
+ xmlns:p="primefaces">
+<f:view>
+<h:head><title>Eskaintza Sortzeko Aplikazioa</title></h:head>
+<h:body>
+<h:form>
+<h3>Nahi duzun produktua igo</h3>
+
+<table>
+	<tr>
+		<td>
+		<table>
+			<tr>
+				<td>Titulua:</td>
+				<td><h:inputText id="titulua" value="#{EskaintzaSortu.titulua}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td>Descripzioa:</td>
+				<td><h:inputText id="descripzioa" value="#{EskaintzaSortu.descripzioa}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td>Prezioa:</td>
+				<td><h:inputText id="prezioa" value="#{EskaintzaSortu.prezioa}"></h:inputText></td>
+			</tr>
+			<tr>
+				<td>Egoera:</td>
+				<td><h:selectOneMenu id="egoera" value="#{EskaintzaSortu.egoera}"></h:selectOneMenu></td>
+			</tr>
+		</table>
+
+		</td>
+
+        <td valign="top">
+            Data (PrimeFaces-ekin):<br />
+            <p:datePicker id="data" value="#{eskaintzaSortu.data}" inline="true" />
+        </td>
+
+	</tr>
+</table>
+<p>
+<h:commandButton value="eskaintzaIgo" width="90px" action="#{login.eskaintzaIgo}"/>
+<h:commandButton value="ITXI" action="#{login.itxi}"/>
+</p>
+</h:form>
+</h:body>
+</f:view>
+</html>

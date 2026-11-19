@@ -47,6 +47,11 @@ beharko dira.
  <artifactId>jakarta.faces</artifactId>
  <version>${faces.version}</version>
  </dependency>
+ <dependency>
+<groupId>org.omnifaces</groupId>
+<artifactId>omnifaces</artifactId>
+<version>4.7.17</version>
+</dependency>
  <!--
  Servlet API: 'provided' eremua derrigorrezkoa da konpilatzeko
  Tomcatek ematen du, WAR fitxategian sartzen bada klase bikoiztuak

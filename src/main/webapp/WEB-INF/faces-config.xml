@@ -11,6 +11,7 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 	<navigation-case>
 	<from-outcome>sortu</from-outcome>
 		<to-view-id>/EskaintzaSortu.xhtml</to-view-id>
+		<redirect/>
 	</navigation-case>
 </navigation-rule>
 

@@ -6,11 +6,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Market JSF-Hasiera</title>
+    <h:outputStylesheet library="css" name="style.css" />  
 </h:head>
 <h:body>
     <h:form>
         <h:messages style="color:red" />
-        
+        <p>
+        	<h:outputLabel value="Email: " />
+        	<h:inputText id="email" value="#{eskaintzaSortu.sellerEmail}"></h:inputText>
+        </p>
         <p>
             <h:commandButton value="Eskaintza Sortu" action="sortu" />
         </p>

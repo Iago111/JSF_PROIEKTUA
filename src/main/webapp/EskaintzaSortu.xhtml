@@ -4,7 +4,9 @@
  xmlns:f="jakarta.faces.core"
  xmlns:p="primefaces">
 <f:view>
-<h:head><title>Eskaintza Sortzeko Aplikazioa</title></h:head>
+<h:head>
+	<title>Eskaintza Sortzeko Aplikazioa</title>
+	<h:outputStylesheet library="css" name="style.css" /></h:head>
 <h:body>
 <h:form>
 <h3>Nahi duzun produktua igo</h3>
@@ -15,19 +17,33 @@
 		<table>
 			<tr>
 				<td>Titulua:</td>
-				<td><h:inputText id="titulua" value="#{EskaintzaSortu.titulua}"></h:inputText></td>
+				<td><h:inputText id="titulua" value="#{eskaintzaSortu.titulua}"></h:inputText></td>
 			</tr>
 			<tr>
 				<td>Descripzioa:</td>
-				<td><h:inputText id="descripzioa" value="#{EskaintzaSortu.descripzioa}"></h:inputText></td>
+				<td><h:inputText id="descripzioa" value="#{eskaintzaSortu.description}"></h:inputText></td>
 			</tr>
 			<tr>
 				<td>Prezioa:</td>
-				<td><h:inputText id="prezioa" value="#{EskaintzaSortu.prezioa}"></h:inputText></td>
+				<td><h:inputText id="prezioa" value="#{eskaintzaSortu.price}"></h:inputText></td>
 			</tr>
 			<tr>
 				<td>Egoera:</td>
-				<td><h:selectOneMenu id="egoera" value="#{EskaintzaSortu.egoera}"></h:selectOneMenu></td>
+				<td>
+					<h:selectOneMenu id="egoera" value="#{eskaintzaSortu.status}" converter="omnifaces.SelectItemsConverter">
+    					<f:selectItems value="#{eskaintzaSortu.egoerak}" var="e" itemValue="#{e}" itemLabel="#{e.mota}" />
+					</h:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h:commandButton value="Argazkia Igo" action="#{eskaintzaSortu.file}"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h:outputText value="Argazkia:" />
+				</td>
 			</tr>
 		</table>
 
@@ -35,15 +51,16 @@
 
         <td valign="top">
             Data (PrimeFaces-ekin):<br />
-            <p:datePicker id="data" value="#{eskaintzaSortu.data}" inline="true" />
+            <p:datePicker id="data" value="#{eskaintzaSortu.date}" inline="true" />
         </td>
 
 	</tr>
 </table>
 <p>
-<h:commandButton value="eskaintzaIgo" width="90px" action="#{login.eskaintzaIgo}"/>
-<h:commandButton value="ITXI" action="#{login.itxi}"/>
+<h:commandButton value="eskaintzaIgo" action="#{eskaintzaSortu.eskaintzaIgo}" styleClass="boton"/>
+<h:commandButton value="ITXI" action="#{eskaintzaSortu.itxi}"/>
 </p>
+<h:messages style="color:blue"/>
 </h:form>
 </h:body>
 </f:view>

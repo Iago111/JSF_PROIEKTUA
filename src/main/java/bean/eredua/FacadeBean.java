@@ -17,6 +17,9 @@ public class FacadeBean {
     }
 
     public static BLFacade getBusinessLogic() {
-        return facadeInterface;
+    	if (facadeInterface == null) {
+			singleton = new FacadeBean();
+		}
+    	return facadeInterface;
     }
 }

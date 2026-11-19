@@ -12,9 +12,15 @@
     <h:form>
         <h:messages style="color:red" />
         <p>
-        	<h:outputLabel value="Email: " />
-        	<h:inputText id="email" value="#{eskaintzaSortu.sellerEmail}"></h:inputText>
-        </p>
+		    Email:
+		    <h:inputText id="email" value="#{eskaintzaSortu.sellerEmail}"
+		                 required="true" requiredMessage="Emaila derrigorrezkoa da."
+		                 validatorMessage="Email formatua ez da zuzena.">
+		        <f:validateRegex pattern="^[\w\.-]+@[\w\.-]+\.\w{2,4}$" />
+		        <f:ajax event="blur" render="msgEmail" />
+		    </h:inputText>
+		    <h:message id="msgEmail" for="email" style="color:red" />
+		</p>	
         <p>
             <h:commandButton value="Eskaintza Sortu" action="sortu" />
         </p>

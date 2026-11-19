@@ -1,5 +1,11 @@
-.boton {
-    font-size: 50px !important;
-    padding: 12px 24px !important;
-    color: white !important;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+form {
+    transform: scale(1.25);
 }

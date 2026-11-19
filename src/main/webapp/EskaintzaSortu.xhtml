@@ -6,9 +6,11 @@
 <f:view>
 <h:head>
 	<title>Eskaintza Sortzeko Aplikazioa</title>
-	<h:outputStylesheet library="css" name="style.css" /></h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="js" name="argazkia.js" />
+</h:head>
 <h:body>
-<h:form>
+<h:form enctype="multipart/form-data">
 <h3>Nahi duzun produktua igo</h3>
 
 <table>
@@ -17,15 +19,39 @@
 		<table>
 			<tr>
 				<td>Titulua:</td>
-				<td><h:inputText id="titulua" value="#{eskaintzaSortu.titulua}"></h:inputText></td>
+				<td>
+				    <h:inputText id="titulua" value="#{eskaintzaSortu.titulua}"
+				                 required="true" requiredMessage="Titulua derrigorrezkoa da.">
+				        <f:validateLength minimum="3" maximum="50" />
+				        <f:ajax event="blur" render="msgTitulua" />
+				    </h:inputText>
+				    <h:message id="msgTitulua" for="titulua" style="color:red" />
+				</td>			
 			</tr>
 			<tr>
 				<td>Descripzioa:</td>
-				<td><h:inputText id="descripzioa" value="#{eskaintzaSortu.description}"></h:inputText></td>
+				<td>
+				    <h:inputText id="descripzioa" value="#{eskaintzaSortu.description}"
+				                 required="true" requiredMessage="Descripzioa derrigorrezkoa da."
+				                 validatorMessage="Descripzioak 5 eta 200 karaktere artean izan behar ditu.">
+				        <f:validateLength minimum="5" maximum="200" />
+				        <f:ajax event="blur" render="msgDescripzioa" />
+				    </h:inputText>
+				    <h:message id="msgDescripzioa" for="descripzioa" style="color:red" />
+				</td>
 			</tr>
 			<tr>
 				<td>Prezioa:</td>
-				<td><h:inputText id="prezioa" value="#{eskaintzaSortu.price}"></h:inputText></td>
+				<td>
+				    <h:inputText id="prezioa" value="#{eskaintzaSortu.price}"
+				                 required="true" requiredMessage="Prezioa derrigorrezkoa da."
+				                 converterMessage="Prezioak zenbaki bat izan behar du."
+				                 validatorMessage="Prezioak 0 baino handiagoa izan behar du.">
+				        <f:validateDoubleRange minimum="0.01" />
+				        <f:ajax event="keyup" render="msgPrezioa" />
+				    </h:inputText>
+				    <h:message id="msgPrezioa" for="prezioa" style="color:red" />
+				</td>			
 			</tr>
 			<tr>
 				<td>Egoera:</td>
@@ -36,29 +62,38 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<h:commandButton value="Argazkia Igo" action="#{eskaintzaSortu.file}"/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<h:outputText value="Argazkia:" />
-				</td>
-			</tr>
+			<td>Argazkia:</td>
+			<td>
+				<h:inputFile id="argazkia" value="#{eskaintzaSortu.uploadedFile}"
+				             style="display: none;" onchange="erakutsiIrudia(this)" />
+				<button type="button" class="boton" onclick="document.querySelector('[id$=\'argazkia\']').click();">
+					Fitxategia aukeratu
+				</button>
+				<span id="fitxategiIzena">Ez da fitxategirik aukeratu</span>
+				<br />
+				<img id="aurrebista" src="#" alt="Irudiaren aurrebista"
+				     style="display: none; max-width: 400px; max-height: 400px; margin-top: 8px; border-radius: 6px;" />
+			</td>
+</tr>
 		</table>
 
 		</td>
 
         <td valign="top">
-            Data (PrimeFaces-ekin):<br />
-            <p:datePicker id="data" value="#{eskaintzaSortu.date}" inline="true" />
-        </td>
+		    Data:<br />
+		    <p:datePicker id="data" value="#{eskaintzaSortu.date}" inline="true"
+		                  required="true" requiredMessage="Data aukeratu behar da."
+		                  validator="#{eskaintzaSortu.balidatuData}">
+		        <p:ajax event="dateSelect" update="msgData" />
+		    </p:datePicker>
+		    <h:message id="msgData" for="data" style="color:red" />
+		</td>
 
 	</tr>
 </table>
 <p>
 <h:commandButton value="eskaintzaIgo" action="#{eskaintzaSortu.eskaintzaIgo}" styleClass="boton"/>
-<h:commandButton value="ITXI" action="#{eskaintzaSortu.itxi}"/>
+<h:commandButton value="ITXI" action="#{eskaintzaSortu.itxi}" immediate="true"/>
 </p>
 <h:messages style="color:blue"/>
 </h:form>
